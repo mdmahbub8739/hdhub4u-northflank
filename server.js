@@ -57,6 +57,14 @@ function decryptVidstackAES(inputHex) {
     return null;
 }
 
+// Home API
+app.get('/home', async (req, res) => {
+    const page = req.query.page || 1;
+    const url = `https://hdhub4u.rehab/page/${page}/`;
+    try {
+        const { data } = await axios.get(url, { headers: HEADERS });
+        const $ = cheerio.load(data);
+        const homeList =
 // Search API
 app.get('/search', async (req, res) => {
     const query = req.query.q;
