@@ -6,7 +6,13 @@ const CryptoJS = require('crypto-js');
 
 const app = express();
 const PORT = process.env.PORT || 8080;
-
+// সব রিকোয়েস্টের আগে এই হেডারটি সেট করে দিন
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*"); // যেকোনো ডোমেইন থেকে রিকোয়েস্ট একসেপ্ট করবে
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+    next();
+});
 const DOMAIN = "https://hdhub4u.rehab";
 const TMDB_API = "https://wild-surf-4a0d.phisher1.workers.dev";
 const TMDB_KEY = "1865f43a0549ca50d341dd9ab8b29f49";
